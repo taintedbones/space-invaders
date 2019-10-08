@@ -1,7 +1,7 @@
 import sys
 import pygame
 from bullet import Bullet
-from alien import Alien
+from alien import *
 from time import sleep
 from scoreboard import Scoreboard
 from game_stats import GameStats
@@ -41,12 +41,13 @@ def check_events(settings, screen, stats, sb, play_button, ship, aliens, bullets
 def create_fleet(settings, screen, ship, aliens):
     alien = Alien(settings, screen)
     alien_width = alien.rect.width
-    number_aliens_x = get_number_aliens_x(settings, alien.rect.width)
+    number_aliens_x = get_number_aliens_x(settings, alien_width)
     number_rows = get_number_rows(settings, ship.rect.height, alien.rect.height)
 
     for row_number in range(number_rows):
         for alien_number in range(number_aliens_x):
-            create_alien(settings, screen, aliens, alien_number, row_number)
+            # Based on row number, pass in appropriate alien to construct
+            create_alien(settings, screen, aliens, row_number, alien_number, row_number)
 
 
 def change_fleet_direction(settings, aliens):
@@ -114,8 +115,14 @@ def get_number_rows(settings, ship_height, alien_height):
     return number_rows
 
 
-def create_alien(settings, screen, aliens, alien_number, row_number):
-    alien = Alien(settings, screen)
+def create_alien(settings, screen, aliens, alien_type, alien_number, row_number):
+    if alien_type == 1:
+        alien = LowerAlien(settings, screen)
+    elif alien_type == 2:
+        alien = MiddleAlien(settings, screen)
+    else:
+        alien = UpperAlien(settings, screen)
+
     alien_width = alien.rect.width
     alien.x = alien_width + 2 * alien_width * alien_number
     alien.rect.x = alien.x
