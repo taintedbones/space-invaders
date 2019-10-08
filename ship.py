@@ -7,7 +7,7 @@ class Ship(Sprite):
         super(Ship, self).__init__()
         self.screen = screen
 
-        self.image = pygame.image.load('Images/ship.png')
+        self.image = pygame.image.load('Images/Ship-1.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -21,6 +21,7 @@ class Ship(Sprite):
         self.center = float(r.centerx)
 
     def update(self):
+        # Modify this so that ship CAN'T move off screen
         if self.moving_right:
             self.center += self.settings.ship_speed_factor
         if self.moving_left:
