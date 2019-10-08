@@ -3,7 +3,7 @@ from pygame.sprite import Sprite
 
 
 class Alien(Sprite):
-    def __init__(self, settings, screen, move_frames):
+    def __init__(self, settings, screen):
         super(Alien, self).__init__()
         self.screen = screen
         self.settings = settings
@@ -11,7 +11,7 @@ class Alien(Sprite):
         self.move_frames = []
         self.hit_frames = ['Images/Explosion-1.png', 'Images/Explosion-2.png',
                            'Images/Explosion-3.png', 'Images/Explosion-4.png']
-        self.image = pygame.image.load('Images/alien.png')
+        self.image = pygame.image.load('Images/Lower-Alien-1.png')
         self.rect = self.image.get_rect()
 
         self.rect.x = self.rect.width
@@ -32,3 +32,40 @@ class Alien(Sprite):
     def update(self):
         self.x += (self.settings.alien_speed_factor * self.settings.fleet_direction)
         self.rect.x = self.x
+
+
+    def explode(self):
+        raise NotImplementedError # Change this
+
+    def points(self):
+        raise NotImplementedError
+
+
+class LowerAlien(Alien):
+    def __init__(self, settings, screen):
+        super(LowerAlien, self).__init__(settings, screen)
+        self.move_frames = ['Lower-Alien-1.png', 'Lower-Alien-2.png']
+        self.image = pygame.image.load('Images/' + self.move_frames[0])
+
+    def points(self):
+        return 10
+
+
+class MiddleAlien(Alien):
+    def __init__(self, settings, screen):
+        super(MiddleAlien, self).__init__(settings, screen)
+        self.move_frames = ['Middle-Alien-1.png', 'Middle-Alien-2.png']
+        self.image = pygame.image.load('Images/' + self.move_frames[0])
+
+    def points(self):
+        return 20
+
+
+class UpperAlien(Alien):
+    def __init__(self, settings, screen):
+        super(UpperAlien, self).__init__(settings, screen)
+        self.move_frames = ['Upper-Alien-1.png', 'Upper-Alien-2.png']
+        self.image = pygame.image.load('Images/' +  self.move_frames[0])
+
+    def points(self):
+        return 30
