@@ -3,11 +3,14 @@ from pygame.sprite import Sprite
 
 
 class Alien(Sprite):
-    def __init__(self, settings, screen):
+    def __init__(self, settings, screen, move_frames):
         super(Alien, self).__init__()
         self.screen = screen
         self.settings = settings
 
+        self.move_frames = []
+        self.hit_frames = ['Images/Explosion-1.png', 'Images/Explosion-2.png',
+                           'Images/Explosion-3.png', 'Images/Explosion-4.png']
         self.image = pygame.image.load('Images/alien.png')
         self.rect = self.image.get_rect()
 
