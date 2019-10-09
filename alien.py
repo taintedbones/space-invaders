@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+from timer import Timer
 
 
 class Alien(Sprite):
@@ -33,9 +34,16 @@ class Alien(Sprite):
         self.x += (self.settings.alien_speed_factor * self.settings.fleet_direction)
         self.rect.x = self.x
 
+        if self.x % 4 == 0:
+            self.image = pygame.image.load('Images/' + self.move_frames[1])
+        else:
+            self.image = pygame.image.load('Images/' + self.move_frames[0])
+
 
     def explode(self):
-        raise NotImplementedError # Change this
+        timer = Timer(self.hit_frames)
+        self.image = pygame.image.load(timer.frame_index())
+
 
     def points(self):
         raise NotImplementedError
