@@ -39,6 +39,9 @@ class Alien(Sprite):
         else:
             self.image = pygame.image.load('Images/' + self.move_frames[0])
 
+    def draw(self):
+        pygame.draw.rect(self.screen, self.settings.bg_color, self.rect)
+        self.blitme()
 
     def explode(self):
         timer = Timer(self.hit_frames)
