@@ -11,10 +11,9 @@ class Menu:
         self.width = settings.screen_width
         self.height = settings.screen_height
         self.bg_color = settings.bg_color
-        self.title = "SPACE INVADERS"
 
-        self.play_button = Button(settings, screen, "PLAY SPACE INVADERS")
-        self.high_score_button = Button(settings, screen, "HIGH SCORES")
+        self.play_button = Button(settings, screen, "PLAY SPACE INVADERS", 48)
+        self.high_score_button = Button(settings, screen, "HIGH SCORES", 48)
 
         self.score_rect = pygame.Rect(0, 0, 500, 500)
         self.border_rect = pygame.Rect(0, 0, self.score_rect.width + 10, self.score_rect.height + 10)
@@ -24,9 +23,9 @@ class Menu:
         alien1 = LowerAlien(self.settings, self.screen)
         alien2 = MiddleAlien(self.settings, self.screen)
         alien3 = UpperAlien(self.settings, self.screen)
-        alien1_score = Button(self.settings, self.screen, "= " + str(alien1.points()) + " PTS")
-        alien2_score = Button(self.settings, self.screen, "= " + str(alien2.points()) + " PTS")
-        alien3_score = Button(self.settings, self.screen, "= " + str(alien3.points()) + " PTS")
+        alien1_score = Button(self.settings, self.screen, "= " + str(alien1.points()) + " PTS", 48)
+        alien2_score = Button(self.settings, self.screen, "= " + str(alien2.points()) + " PTS", 48)
+        alien3_score = Button(self.settings, self.screen, "= " + str(alien3.points()) + " PTS", 48)
 
         alien1.rect.top = self.score_rect.top + 150
         alien1.rect.left = self.score_rect.left + 130
@@ -61,6 +60,21 @@ class Menu:
         self.high_score_button.draw_button()
         self.play_button.draw_button()
 
+    def draw_title(self):
+        font_size = 90
+        title1 = Button(self.settings, self.screen, "SPACE", font_size)
+        title2 = Button(self.settings, self.screen, "INVADERS", font_size)
+        title1.text_color = (0, 255, 0)
+        title2.text_color = (0, 255, 0)
+
+        title1.rect.centery = self.score_rect.centery
+        title1.rect.top = self.score_rect.top + 20
+        title2.rect.centery = self.score_rect.centery
+        title2.rect.top = title1.rect.bottom + 5
+
+        title2.draw_button()
+        title1.draw_button()
+
     def draw(self):
         self.score_rect.center = self.screen_rect.center
         self.border_rect.center = self.screen_rect.center
@@ -68,10 +82,6 @@ class Menu:
         self.screen.fill(self.settings.bg_color)
         pygame.draw.rect(self.screen, (255, 255, 255), self.border_rect)
         pygame.draw.rect(self.screen, self.bg_color, self.score_rect)
+        self.draw_title()
         self.draw_buttons()
         self.draw_alien_score()
-        # draw rectangle
-        # make rectangle black
-        # draw alien & text with corresponding points(x4)
-        # Show play button
-        # show high score button
