@@ -192,16 +192,15 @@ def update_bullets(settings, screen, stats, sb, ship, aliens, bullets):
 
 
 def update_screen(settings, screen, stats, sb, ship, aliens, bullets, menu):
-    screen.fill(settings.bg_color)
-    for bullet in bullets.sprites():
-        bullet.draw_bullet()
-    ship.blitme()
-    aliens.draw(screen)
-
-    sb.show_score()
-
     if not stats.game_active:
         menu.draw()
-        #.menu.play_button.draw_button()
+    else:
+        screen.fill(settings.bg_color)
+        for bullet in bullets.sprites():
+            bullet.draw_bullet()
+        ship.blitme()
+        aliens.draw(screen)
+
+        sb.show_score()
 
     pygame.display.flip()
