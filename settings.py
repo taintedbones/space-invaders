@@ -7,6 +7,7 @@ class Settings:
         self.screen_height = 700
         self.dimensions = 1200, 700
         self.bg_color = pygame.Color('#404040')
+        self.default_font = 'Fonts/8-Bit Madness.ttf'
 
         # Ship settings
         self.ship_speed_factor = 1.5
