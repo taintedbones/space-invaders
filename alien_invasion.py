@@ -20,8 +20,6 @@ def run_game():
     screen = pygame.display.set_mode(settings.dims())
     pygame.display.set_caption('Alien Invasion')
 
-    play_button = Button(settings, screen, "Play")
-
     # Create an instance to store game statistics and create a scoreboard
     stats = GameStats(settings)
     sb = Scoreboard(settings, screen, stats)
