@@ -8,8 +8,6 @@ class Menu:
         self.screen = screen
         self.screen_rect = screen.get_rect()
         self.settings = settings
-        self.width = settings.screen_width
-        self.height = settings.screen_height
         self.bg_color = settings.bg_color
 
         self.play_button = Button(settings, screen, "PLAY SPACE INVADERS", 48)
