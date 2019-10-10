@@ -10,6 +10,7 @@ from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
 from menu_screen import Menu
+from highscore_screen import HighScoreScreen
 
 # PYTHON CRASH COURSE - Ch 12 has references for ship img, shooting bullets,
 
@@ -25,6 +26,7 @@ def run_game():
     sb = Scoreboard(settings, screen, stats)
     ship = Ship(screen, settings)
     menu = Menu(screen, settings)
+    score_screen = HighScoreScreen(screen, settings)
 
     bullets = Group()
     aliens = Group()
@@ -32,14 +34,14 @@ def run_game():
     gf.create_fleet(settings, screen, ship, aliens)
 
     while True:
-        gf.check_events(settings, screen, stats, sb, menu, ship, aliens, bullets)
+        gf.check_events(settings, screen, stats, sb, menu, ship, aliens, bullets, score_screen)
 
         if stats.game_active:
             ship.update()
             gf.update_bullets(settings, screen, stats, sb, ship, aliens, bullets)
             gf.update_aliens(settings, stats, screen, sb, ship, aliens, bullets)
 
-        gf.update_screen(settings, screen, stats, sb, ship, aliens, bullets, menu)
+        gf.update_screen(settings, screen, stats, sb, ship, aliens, bullets, menu, score_screen)
 
         screen.fill(settings.bg_color)
         ship.blitme()

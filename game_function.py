@@ -3,9 +3,6 @@ import pygame
 from bullet import Bullet
 from alien import *
 from time import sleep
-from menu_screen import Menu
-from scoreboard import Scoreboard
-from game_stats import GameStats
 
 
 def change_fleet_direction(settings, aliens):
@@ -43,13 +40,14 @@ def check_bullet_alien_collisions(settings, screen, stats, sb, ship, aliens, bul
         create_fleet(settings, screen, ship, aliens)
 
 
-def check_events(settings, screen, stats, sb, menu, ship, aliens, bullets):
+def check_events(settings, screen, stats, sb, menu, ship, aliens, bullets, score_screen):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(settings, screen, stats, sb, menu, ship, aliens, bullets, mouse_x, mouse_y)
+            check_high_score_button(stats, score_screen, mouse_x, mouse_y)
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, settings, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
@@ -117,6 +115,13 @@ def check_play_button(settings, screen, stats, sb, menu, ship, aliens, bullets, 
 
         create_fleet(settings, screen, ship, aliens)
         ship.center_ship()
+
+
+def check_high_score_button(stats, score_screen, mouse_x, mouse_y):
+    button_clicked = score_screen.return_button.rect.collidepoint(mouse_x, mouse_y)
+    if button_clicked and not stats.game_active:
+        score_screen.draw()
+        score_screen.clicked = True
 
 
 def create_alien(settings, screen, aliens, alien_type, alien_number, row_number):
@@ -191,7 +196,7 @@ def update_bullets(settings, screen, stats, sb, ship, aliens, bullets):
     check_bullet_alien_collisions(settings, screen, stats, sb, ship, aliens, bullets)
 
 
-def update_screen(settings, screen, stats, sb, ship, aliens, bullets, menu):
+def update_screen(settings, screen, stats, sb, ship, aliens, bullets, menu, score_screen):
     if not stats.game_active:
         menu.draw()
     else:
