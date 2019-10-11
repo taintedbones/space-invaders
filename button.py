@@ -14,11 +14,14 @@ class Button:
 
         self.rect = pygame.Rect(0, 0, self.width, self.height)
         self.rect.center = self.screen_rect.center
+        self.clicked = False
 
 
     def prep_msg(self):
         self.msg_image = self.font.render(self.text, True, self.text_color, self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
+        self.rect.width = self.msg_image_rect.width
+        self.rect.height = self.msg_image_rect.height
         self.msg_image_rect.center = self.rect.center
 
     def draw_button(self):

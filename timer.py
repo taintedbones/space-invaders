@@ -1,4 +1,4 @@
-import pygame
+from pygame import time
 
 
 class Timer:
@@ -12,8 +12,8 @@ class Timer:
         self.last_frame = len(frames) - 1 if step == 1 else 0
         self.last = None
 
-    def frame_index(self):
-        now = pygame.time.get_ticks()
+    def get_frame_index(self):
+        now = time.get_ticks()
 
         if self.last is None:
             self.last = now
@@ -36,4 +36,4 @@ class Timer:
         return 'Timer(frames=' + self.frames + ', wait=' + str(self.wait) + ', index=' + str(self.frame_index) + ')'
 
     def image_rect(self):
-        return self.frames[self.frame_index()]
+        return self.frames[self.get_frame_index()]

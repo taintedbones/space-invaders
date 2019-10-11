@@ -4,10 +4,13 @@ import pygame
 class Settings:
     def __init__(self):
         self.screen_width = 1200
-        self.screen_height = 700
-        self.dimensions = 1200, 700
+        self.screen_height = 800
+        self.dimensions = self.screen_width, self.screen_height
         self.bg_color = pygame.Color('#404040')
+        self.play_bg_color = pygame.Color('#0F0945')
         self.default_font = 'Fonts/8-Bit Madness.ttf'
+        self.high_score_file = 'high_scores.txt'
+        self.alien_points = 0
 
         # Ship settings
         self.ship_speed_factor = 1.5
@@ -28,6 +31,8 @@ class Settings:
         self.speedup_scale = 1.1
         # How quickly alien point values increase
         self.score_scale = 1.5
+
+        self.bunker_health = 20
 
         self.initialize_scale = 1.1
         self.initialize_dynamic_settings()

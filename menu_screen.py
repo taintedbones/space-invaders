@@ -1,5 +1,4 @@
 from button import Button
-import pygame
 from alien import *
 
 
@@ -52,7 +51,7 @@ class Menu:
     def draw_buttons(self):
         self.high_score_button.rect.center = self.score_rect.center
         self.play_button.rect.center = self.score_rect.center
-        self.high_score_button.rect.bottom = self.score_rect.bottom - 10
+        self.high_score_button.rect.bottom = self.score_rect.bottom - 20
         self.play_button.rect.bottom = self.high_score_button.rect.top - 10
 
         self.high_score_button.draw_button()
@@ -65,10 +64,11 @@ class Menu:
         title1.text_color = (0, 255, 0)
         title2.text_color = (0, 255, 0)
 
-        title1.rect.centery = self.score_rect.centery
+        title1.rect.center = self.score_rect.center
         title1.rect.top = self.score_rect.top + 20
-        title2.rect.centery = self.score_rect.centery
+        title2.rect.center = self.screen_rect.center
         title2.rect.top = title1.rect.bottom + 5
+        title2.rect.left -= 60
 
         title2.draw_button()
         title1.draw_button()
